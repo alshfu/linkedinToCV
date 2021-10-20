@@ -2,7 +2,7 @@ from linkedinScraper import Person
 
 
 if __name__ == '__main__':
-    login = ''
+    login = 'llkljl'
     password = ''
     url_page = ''
     person = Person(login_name=login, pwd=password, url=url_page)
