@@ -143,11 +143,11 @@ class Person:
             })
         return projects_data
 
-    def get_profile_image(self):
-        img = self.driver.find_elements_by_class_name('top-card__profile-image-container')[0]
-        img = img.find_elements_by_tag_name('img')[0].get_attribute('src')
-        print(img)
-        return img
+    # def get_profile_image(self):
+    #     img = self.driver.find_elements_by_class_name('top-card__profile-image-container')[0]
+    #     img = img.find_elements_by_tag_name('img')[0].get_attribute('src')
+    #     print(img)
+    #     return img
 
     def get_languages(self) -> []:
         languages_data = []
@@ -192,10 +192,10 @@ class Person:
         self.driver.close()
 
 if __name__ == '__main__':
-    login = 'alshfu@gmail.com'
-    password = 'as785ghqw590!Q'
-    url_page = 'file:///C:/Users/User/Desktop/my%20link/Edit%20My%20Public%20Profile%20_%20LinkedIn.html'
+    login = ''
+    password = ''
+    url_page = ''
     person = Person(login_name=login, pwd=password, url=url_page)
-    person.get_profile_image()
+    # person.get_profile_image()
     person.create_json_file()
     person.driver_close()
