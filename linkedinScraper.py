@@ -128,30 +128,36 @@ class Person:
 
     def get_courses(self) -> []:
         courses_data = []
-        courses_list = self.driver.find_elements(By.CLASS_NAME, 'courses__list')[0]
-        courses_list_items = courses_list.find_elements(By.CLASS_NAME, 'profile-section-card')
-        for courses_list_item in courses_list_items:
-            titel = courses_list_item.find_elements(By.CLASS_NAME, 'profile-section-card__title')[0].text
-            subtitle = courses_list_item.find_elements(By.CLASS_NAME, 'profile-section-card__subtitle')[0].text
-            courses_data.append({
-                "titel": titel,
-                "subtitle": subtitle
-            })
+        try:
+            courses_list = self.driver.find_elements(By.CLASS_NAME, 'courses__list')[0]
+            courses_list_items = courses_list.find_elements(By.CLASS_NAME, 'profile-section-card')
+            for courses_list_item in courses_list_items:
+                titel = courses_list_item.find_elements(By.CLASS_NAME, 'profile-section-card__title')[0].text
+                subtitle = courses_list_item.find_elements(By.CLASS_NAME, 'profile-section-card__subtitle')[0].text
+                courses_data.append({
+                    "titel": titel,
+                    "subtitle": subtitle
+                })
+        except IndexError:
+            pass
         return courses_data
 
     def get_projects(self) -> []:
         projects_data = []
-        projects__list = self.driver.find_elements(By.CLASS_NAME, 'projects__list')[0]
-        projects__list_items = projects__list.find_elements(By.CLASS_NAME, 'personal-project')
-        for projects__list_item in projects__list_items:
-            title = projects__list_item.find_elements(By.CLASS_NAME, 'profile-section-card__title')[0].text
-            subtitle = projects__list_item.find_elements(By.CLASS_NAME, 'profile-section-card__subtitle')[0].text
-            info = projects__list_item.find_elements(By.CLASS_NAME, 'profile-section-card__meta')[0].text
-            projects_data.append({
-                "title": title,
-                "subtitle": subtitle,
-                "info": info
-            })
+        try:
+            projects__list = self.driver.find_elements(By.CLASS_NAME, 'projects__list')[0]
+            projects__list_items = projects__list.find_elements(By.CLASS_NAME, 'personal-project')
+            for projects__list_item in projects__list_items:
+                title = projects__list_item.find_elements(By.CLASS_NAME, 'profile-section-card__title')[0].text
+                subtitle = projects__list_item.find_elements(By.CLASS_NAME, 'profile-section-card__subtitle')[0].text
+                info = projects__list_item.find_elements(By.CLASS_NAME, 'profile-section-card__meta')[0].text
+                projects_data.append({
+                    "title": title,
+                    "subtitle": subtitle,
+                    "info": info
+                })
+        except IndexError:
+            pass
         return projects_data
 
     def get_profile_image(self):
@@ -161,15 +167,18 @@ class Person:
 
     def get_languages(self) -> []:
         languages_data = []
-        languages_list = self.driver.find_elements(By.CLASS_NAME, 'languages__list')[0]
-        languages_list_items = languages_list.find_elements(By.CLASS_NAME, 'profile-section-card ')
-        for languages_list_item in languages_list_items:
-            title = languages_list_item.find_elements(By.CLASS_NAME, 'profile-section-card__title')[0].text
-            subtitle = languages_list_item.find_elements(By.CLASS_NAME, 'profile-section-card__subtitle')[0].text
-            languages_data.append({
-                "title": title,
-                "subtitle": subtitle
-            })
+        try:
+            languages_list = self.driver.find_elements(By.CLASS_NAME, 'languages__list')[0]
+            languages_list_items = languages_list.find_elements(By.CLASS_NAME, 'profile-section-card ')
+            for languages_list_item in languages_list_items:
+                title = languages_list_item.find_elements(By.CLASS_NAME, 'profile-section-card__title')[0].text
+                subtitle = languages_list_item.find_elements(By.CLASS_NAME, 'profile-section-card__subtitle')[0].text
+                languages_data.append({
+                    "title": title,
+                    "subtitle": subtitle
+                })
+        except IndexError:
+            pass
         return languages_data
 
     def get_all_data(self) -> {}:
