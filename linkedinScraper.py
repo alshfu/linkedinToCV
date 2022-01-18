@@ -1,7 +1,7 @@
-import selenium
 from selenium import webdriver
-from selenium.webdriver.common.by import By
+from selenium.webdriver.chrome.service import Service
 from webdriver_manager.chrome import ChromeDriverManager
+from selenium.webdriver.common.by import By
 from time import sleep
 import json
 import codecs
@@ -10,7 +10,8 @@ import codecs
 class Person:
     def __init__(self, login_name=None, pwd=None, url=None):
         self.url = url
-        self.driver = webdriver.Chrome(ChromeDriverManager().install())
+        s = Service(ChromeDriverManager().install())
+        self.driver = webdriver.Chrome(service=s)
         self.get_person_page()
         self.login = login_name
         self.password = pwd
@@ -65,9 +66,9 @@ class Person:
             experience__list = self.driver.find_element(By.CLASS_NAME, 'experience__list')
             experiences_items = experience__list.find_elements(By.CLASS_NAME, 'experience-item')
             for experiences_item in experiences_items:
-                organisations_name = experiences_item.find_element_by_class_name('profile-section-card__subtitle').text
-                title = experiences_item.find_element_by_class_name('profile-section-card__title').text
-                date_r = experiences_item.find_element_by_class_name('date-range')
+                organisations_name = experiences_item.find_element(By.CLASS_NAME,'profile-section-card__subtitle').text
+                title = experiences_item.find_element(By.CLASS_NAME,'profile-section-card__title').text
+                date_r = experiences_item.find_element(By.CLASS_NAME,'date-range')
                 time_1 = date_r.find_elements_by_tag_name('time')[0].text
                 try:
                     time_2 = date_r.find_elements_by_tag_name('time')[1].text
@@ -78,7 +79,7 @@ class Person:
                     description = experiences_item.find_elements(By.CLASS_NAME, 'experience-item__description')[0].text
                 except IndexError:
                     description = ''
-                location = experiences_item.find_element_by_class_name('experience-item__location').text
+                location = experiences_item.find_element(By.CLASS_NAME,'experience-item__location').text
                 experiences_data.append({
                     "organisations_name": organisations_name,
                     "title": title,
@@ -182,6 +183,7 @@ class Person:
         return languages_data
 
     def get_all_data(self) -> {}:
+        _ = input("Press Enter: ")
         data = {
             "img_url": self.get_profile_image(),
             "github": "https://github.com/alshfu",
@@ -212,7 +214,7 @@ class Person:
 if __name__ == '__main__':
     login = ''
     password = ''
-    url_page = ''
+    url_page = 'https://www.linkedin.com/in/alshfu/'
     person = Person(login_name=login, pwd=password, url=url_page)
     person.create_json_file()
     person.driver_close()
