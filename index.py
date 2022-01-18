@@ -78,13 +78,20 @@ def create_interests_items(interests: [] = []) -> str:
     </div>'''
 
 
-def create_summary_item(headline: str) -> str:
-    return '''
-        <h2 class="section-title"><span class="icon-holder"><i class="fas fa-user"></i></span>Career Profile</h2>
-        <div class="summary">
-            <p>''' + headline + '''</p>
-        </div><!--//summary-->
-    '''
+# ToDo:
+# def create_summary_item(headline: str) -> str:
+#     output = headline.split('\n')
+#     string = ""
+#     for line in output:
+#         string = string + line + "<br>"
+#
+#     return '''
+#         <h2 class="section-title"><span class="icon-holder"><i class="fas fa-user"></i></span>Career Profile</h2>
+#         <div class="summary">
+#             <p>''' + string + '''</p>
+#         </div><!--//summary-->
+#     '''
+#     # return ""
 
 
 def create_experiences_items(experiences: [] = []) -> str:
@@ -229,10 +236,7 @@ def create_body(json_data) -> str:
             </div><!--//sidebar-wrapper-->
     
             <div class="main-wrapper">
-                 <section class="section summary-section">
-                 ''' + create_summary_item(json_data['about_info']) + '''
-                 </section>
-                 <!--//section-->
+
     
                 <section class="section experiences-section">
                 ''' + create_experiences_items(json_data['experiences']) + '''
@@ -278,5 +282,6 @@ def create_index_html():
     html_code = head_of_html + create_body(data)
     with codecs.open(file_name, encoding='utf-8', mode='w') as html_file:
         html_file.write(html_code)
+
 
 create_index_html()
